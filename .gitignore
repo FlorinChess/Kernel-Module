@@ -1,0 +1,10 @@
+.vscode/
+
+.linux*
+.Module.symvers.cmd
+.modules.order.cmd
+Module*
+modules*
+
+linux_kernel_module*
+!linux_kernel_module.c

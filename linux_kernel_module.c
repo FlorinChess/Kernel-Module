@@ -4,17 +4,22 @@
 #include <linux/list.h>     /* Needed for linked list */
 #include <linux/types.h>    /* Needed for list macros */
 #include <linux/slab.h>     /* Needed for Kernel */
+#include <linux/uaccess.h>
 
-// Module Metadata
+#define READ_SIZE 16
 
+void print_hello(char* username) {
+  printk(KERN_INFO "Hello %s !\n", username);
+  username = NULL;
+}
 
 static int __init init_hello(void)
 {
-  printk(KERN_INFO "Hello world !\n");
-  
-  /*
-  * A non 0 return means init_module failed; module can't be loaded.
-  */
+  char username_buffer[READ_SIZE];
+  strncpy_from_user(username_buffer, (char*)0x0000005000000, READ_SIZE);
+
+  print_hello(username_buffer);
+
   return 0;
 }
 

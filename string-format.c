@@ -7,29 +7,29 @@
 #include <linux/uaccess.h>
 
 #define READ_SIZE 16
+#define USERNAME_ADDRESS (char*)0x0000005004000
 
-void print_hello(char* username) {
-  printk(KERN_INFO "Hello %s !\n", username);
-  username = NULL;
+void print_username(char* username) {
+  printk(username);
 }
 
-static int __init init_hello(void)
+static int __init init_username_reader(void)
 {
   char username_buffer[READ_SIZE];
-  strncpy_from_user(username_buffer, (char*)0x0000005000000, READ_SIZE);
+  strncpy_from_user(username_buffer, USERNAME_ADDRESS, READ_SIZE);
 
-  print_hello(username_buffer);
+  print_username(username_buffer);
 
   return 0;
 }
 
-static void __exit cleanup_hello(void) {
+static void __exit cleanup_username_reader(void) {
   printk(KERN_INFO "Bye!\n");
 }
 
-module_init(init_hello);
-module_exit(cleanup_hello);
+module_init(init_username_reader);
+module_exit(cleanup_username_reader);
 
 MODULE_AUTHOR("Florin Zamfir");
-MODULE_DESCRIPTION("Hello world driver");
+MODULE_DESCRIPTION("Format string vulenrability demo.");
 MODULE_LICENSE("GPL");

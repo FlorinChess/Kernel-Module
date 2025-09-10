@@ -6,8 +6,8 @@
 #include <linux/slab.h>     /* Needed for Kernel */
 #include <linux/uaccess.h>
 
-#define USERNAME_ADDRESS 0x0000005000000
-#define PASSWORD_ADDRESS 0x0000005001000
+#define USERNAME_ADDRESS (char*) 0x0000005000000
+#define PASSWORD_ADDRESS (char*) 0x0000005001000
 
 char* password = "secretPassword";
 char password_buffer[040];

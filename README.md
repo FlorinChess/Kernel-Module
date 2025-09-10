@@ -1,2 +1,2 @@
 # Kernel-Module
-Example linux kernel module used to test an experimental LLVM static analysis compiler pass.
+This repository contains simple linux kernel modules that contain various binary exploitation vulnerabilities. The main purpose of these modules is to test the functionality of a static analysis compiler pass implemented in LLVM.

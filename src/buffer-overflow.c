@@ -35,3 +35,4 @@ module_exit(cleanup_login);
 MODULE_AUTHOR("Florin Zamfir");
 MODULE_DESCRIPTION("Format string vulenrability demo.");
 MODULE_LICENSE("GPL");
+MODULE_VERSION("1.0");

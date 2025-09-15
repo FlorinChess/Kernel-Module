@@ -7,16 +7,15 @@
 #include <linux/uaccess.h>
 
 #define SIZE 16
-#define COMMAND_ADDRESS (char*)0x0000005000000
 #define MESSAGE_ADDRESS (char*)0x0000005004000
 #define START_COMMAND "start"
 #define CANCEL_COMMAND "cancel"
 #define SEND_COMMAND "send"
 
-static int __init init_command_reader(void)
+static int read_command(const char* command_address)
 {
   char* command_buffer = kmalloc(SIZE, GFP_KERNEL);
-  strncpy_from_user(command_buffer, COMMAND_ADDRESS, SIZE);
+  strncpy_from_user(command_buffer, command_address, SIZE);
 
   char* message_buffer = NULL;
 
@@ -48,6 +47,12 @@ static int __init init_command_reader(void)
   return 0;
 }
 
+static int __init init_command_reader(void)
+{
+  printk(KERN_INFO "Module intilized!\n");
+  return 0;
+}
+
 static void __exit cleanup_command_reader(void) {
   printk(KERN_INFO "Cleanup complete!\n");
 }
@@ -58,3 +63,4 @@ module_exit(cleanup_command_reader);
 MODULE_AUTHOR("Florin Zamfir");
 MODULE_DESCRIPTION("Use-after-free vulnerability demo.");
 MODULE_LICENSE("GPL");
+MODULE_VERSION("1.0");

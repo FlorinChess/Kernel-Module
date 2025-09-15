@@ -1,4 +1,5 @@
 .vscode/
+llvm-modules/
 
 .linux*
 .Module.symvers.cmd
